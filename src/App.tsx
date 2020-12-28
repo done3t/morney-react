@@ -1,62 +1,52 @@
 import React from 'react';
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from 'react-router-dom';
-import styled from 'styled-components';
-import Nav from 'components/Nav';
-
-const Wrapper = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-const Main = styled.div`
-  flex: 1;
-  overflow: auto;
-`;
+import {HashRouter as Router, Link, Redirect, Route, Switch} from 'react-router-dom';
+import Layout from 'components/Layout';
 
 
 function App() {
   return (
     <Router>
-      <Wrapper>
-        <Main>
-          <Switch>
-            <Route path="/tags">
-              <Tags/>
-            </Route>
-            <Route path="/statistics">
-              <Statistics/>
-            </Route>
-            <Route path="/money">
-              <Money/>
-            </Route>
-            <Redirect exact from="/" to="/money"/>
-            <Route path="*">
-              <NoMatch/>
-            </Route>
-          </Switch>
-        </Main>
-        <Nav/>
-      </Wrapper>
+      <Switch>
+        <Route path="/tags">
+          <Tags/>
+        </Route>
+        <Route path="/statistics">
+          <Statistics/>
+        </Route>
+        <Route path="/money">
+          <Money/>
+        </Route>
+        <Redirect exact from="/" to="/money"/>
+        <Route path="*">
+          <NoMatch/>
+        </Route>
+      </Switch>
     </Router>
   );
 }
 
 function Money() {
-  return <h2>Money</h2>;
+  return (
+    <Layout>
+      <h2>记账页面</h2>
+    </Layout>
+  );
 }
 
 function Tags() {
-  return <h2>Tags</h2>;
+  return (
+    <Layout>
+      <h2>标签页面</h2>
+    </Layout>
+  );
 }
 
 function Statistics() {
-  return <h2>Statistics</h2>;
+  return (
+    <Layout>
+      <h2>统计页面</h2>
+    </Layout>
+  );
 }
 
 function NoMatch() {
