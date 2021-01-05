@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import React, {useState} from 'react';
 
-export const TagsSection = styled.section`
+const Wrapper = styled.section`
   flex: 1;
   overflow: auto;
   background: #FFF;
@@ -22,6 +23,10 @@ export const TagsSection = styled.section`
       font-size: 14px;
       padding: 3px 18px;
       margin: 8px 12px;
+
+      &.selected {
+        background: #f60;
+      }
     }
   }
 
@@ -34,3 +39,38 @@ export const TagsSection = styled.section`
     margin-top: 8px;
   }
 `;
+
+const TagsSection: React.FC = () => {
+  const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const onAddTag = () => {
+    const tagName = prompt('新标签的名称为：');
+    if (tagName && tagName.trim()) {
+      setTags([...tags, tagName]);
+    }
+  };
+  const onToggleTag = (tag: string) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter(t => t !== tag));
+    } else {
+      setSelectedTags([...selectedTags, tag]);
+    }
+  };
+  const getClass = (tag: string) => selectedTags.includes(tag) ? 'selected' : '';
+
+  return (
+    <Wrapper>
+      <ol>
+        {tags.map(tag =>
+          <li key={tag} onClick={() => {
+            onToggleTag(tag);
+          }} className={getClass(tag)}>
+            {tag}
+          </li>
+        )}
+      </ol>
+      <button onClick={onAddTag}>新增标签</button>
+    </Wrapper>
+  );
+};
+export {TagsSection};
