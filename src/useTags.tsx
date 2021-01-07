@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {createId} from './lib/createId';
 
-type Tag = {
+type TagPO = {
   id: number,
   name: string
 }
@@ -12,7 +12,7 @@ const defaultTags = [
   {id: createId(), name: '行'},
 ];
 const useTags = () => {
-  const [tags, setTags] = useState<Tag[]>(defaultTags);
+  const [tags, setTags] = useState<TagPO[]>(defaultTags);
   const findTag = (id: number) => tags.find(tag => tag.id === id);
   const findTagIndex = (id: number) => tags.findIndex(tag => tag.id === id);
   const updateTag = (id: number, obj: { name: string }) => {
@@ -21,7 +21,13 @@ const useTags = () => {
     tagsClone.splice(index, 1, {id, name: obj.name});
     setTags(tagsClone);
   };
-  return {tags, setTags, findTag, findTagIndex, updateTag};
+  const deleteTag = (id: number) => {
+    const index = findTagIndex(id);
+    const tagsClone = JSON.parse(JSON.stringify(tags));
+    tags.splice(index, 1);
+    setTags(tagsClone);
+  };
+  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag};
 };
 export {useTags};
-export type {Tag};
+export type {TagPO};

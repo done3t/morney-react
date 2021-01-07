@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useParams} from 'react-router-dom';
-import {useTags} from '../useTags';
+import {TagPO, useTags} from '../useTags';
 import Layout from 'components/Layout';
 import Icon from 'components/Icon';
 import {Input} from 'components/Input';
@@ -25,16 +25,11 @@ type Params = {
   id: string
 }
 const Tag: React.FC = () => {
-  const {findTag, updateTag} = useTags();
+  const {findTag, updateTag, deleteTag} = useTags();
   let {id} = useParams<Params>();
-  const tag = findTag(Number(id))!;
-  return (
-    <Layout>
-      <Topbar>
-        <Icon name="left"/>
-        <span>编辑标签</span>
-        <Icon/>
-      </Topbar>
+  const tag = findTag(Number(id));
+  const tagContent = (tag: TagPO) => (
+    <div>
       <InputWrapper>
         <Input label="标签名" type="text"
                placeholder="标签名" value={tag.name}
@@ -44,8 +39,20 @@ const Tag: React.FC = () => {
         />
       </InputWrapper>
       <ButtonWrapper>
-        <Button>删除标签</Button>
+        <Button onClick={() => {
+          deleteTag(tag.id);
+        }}>删除标签</Button>
       </ButtonWrapper>
+    </div>
+  );
+  return (
+    <Layout>
+      <Topbar>
+        <Icon name="left"/>
+        <span>编辑标签</span>
+        <Icon/>
+      </Topbar>
+      {tag ? tagContent(tag) : <ButtonWrapper>tag 不存在</ButtonWrapper>}
     </Layout>
   );
 };
