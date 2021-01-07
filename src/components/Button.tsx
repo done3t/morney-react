@@ -8,4 +8,11 @@ const Button = styled.button`
   background: #f60;
   border-radius: 4px;
 `;
-export {Button};
+const ButtonWrapper = styled.div`
+  width: 100%;
+  padding: 16px;
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+`;
+export {Button, ButtonWrapper};

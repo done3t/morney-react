@@ -1,10 +1,10 @@
-import Layout from 'components/Layout';
 import React from 'react';
-import {useTags} from '../useTags';
 import styled from 'styled-components';
-import Icon from 'components/Icon';
 import {Link} from 'react-router-dom';
-import {Button} from 'components/Button';
+import Layout from 'components/Layout';
+import Icon from 'components/Icon';
+import {Button, ButtonWrapper} from 'components/Button';
+import {useTags} from '../useTags';
 
 const TagList = styled.ol`
   font-size: 16px;
@@ -24,20 +24,10 @@ const TagList = styled.ol`
   }
 `;
 
-const ButtonWrapper = styled.div`
-  align-self: center;
-  padding: 16px;
-  margin-top: 32px;
-`;
-const Box = styled(Layout)`
-  display: flex;
-  flex-direction: column;
-`;
-
 function Tags() {
   const {tags, setTags} = useTags();
   return (
-    <Box>
+    <Layout>
       <TagList>
         {tags.map(tag =>
           <li key={tag.id}>
@@ -51,7 +41,7 @@ function Tags() {
       <ButtonWrapper>
         <Button>新增标签</Button>
       </ButtonWrapper>
-    </Box>
+    </Layout>
   );
 }
 
