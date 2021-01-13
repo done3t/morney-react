@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useParams} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {TagPO, useTags} from '../useTags';
 import Layout from 'components/Layout';
 import Icon from 'components/Icon';
@@ -45,10 +45,15 @@ const Tag: React.FC = () => {
       </ButtonWrapper>
     </div>
   );
+
+  const history = useHistory();
+  const onClickBack = () => {
+    history.goBack();
+  };
   return (
     <Layout>
       <Topbar>
-        <Icon name="left"/>
+        <Icon name="left" onClick={onClickBack}/>
         <span>编辑标签</span>
         <Icon/>
       </Topbar>
