@@ -21,13 +21,12 @@ const NumberPadSection: React.FC<Props> = (props) => {
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) {return;}
     if (text === 'OK') {
+      props.onChange(Number(output));
       if (props.onOK) {
         props.onOK();
       }
-      props.onChange(Number(output));
       return;
     }
-
     if ([...'0123456789.', ...['删除', '清空']].includes(text)) {
       setOutput(generateOutput(text, output));
     }
