@@ -39,8 +39,6 @@ function Money() {
   };
   return (
     <Box>
-      {JSON.stringify(selected)}
-      <hr/>
       <TagsSection value={selected.tagIds}
                    onChange={(tagIds) => onChange({tagIds})}
       />
