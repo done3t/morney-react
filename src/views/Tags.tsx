@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import Layout from 'components/Layout';
 import Icon from 'components/Icon';
 import {Button, ButtonWrapper} from 'components/Button';
-import {useTags} from '../useTags';
+import {useTags} from '../hooks/useTags';
 
 const TagList = styled.ol`
   font-size: 16px;
@@ -25,7 +25,8 @@ const TagList = styled.ol`
 `;
 
 function Tags() {
-  const {tags, setTags} = useTags();
+  const {tags, addTag} = useTags();
+  console.log('use tags')
   return (
     <Layout>
       <TagList>
@@ -39,7 +40,7 @@ function Tags() {
         )}
       </TagList>
       <ButtonWrapper>
-        <Button>新增标签</Button>
+        <Button onClick={addTag}>新增标签</Button>
       </ButtonWrapper>
     </Layout>
   );

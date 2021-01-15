@@ -27,13 +27,8 @@ function Money() {
   };
   return (
     <Box>
-      {selected.tagIds.join(',')}
+      {JSON.stringify(selected)}
       <hr/>
-      {selected.note}
-      <hr/>
-      {selected.category}
-      <hr/>
-      {selected.amount}
       <TagsSection value={selected.tagIds}
                    onChange={(tagIds) => onChange({tagIds})}
       />

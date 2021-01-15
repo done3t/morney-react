@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useHistory, useParams} from 'react-router-dom';
-import {TagPO, useTags} from '../useTags';
+import {TagPO, useTags} from '../hooks/useTags';
 import Layout from 'components/Layout';
 import Icon from 'components/Icon';
 import {Input} from 'components/Input';
