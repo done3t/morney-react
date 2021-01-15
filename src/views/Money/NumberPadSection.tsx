@@ -8,27 +8,20 @@ type Props = {
   onOK?: () => void;
 }
 const NumberPadSection: React.FC<Props> = (props) => {
-  const [output, _setOutput] = useState(props.value.toString());
-  const setOutput = (output: string) => {
-    if (output.length > 16) {
-      output = output.slice(0, 16);
-    } else if (output.length === 0) {
-      output = '0';
-    }
-    _setOutput(output);
-  };
+  const [output, setOutput] = useState(props.value.toString());
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) {return;}
     if (text === 'OK') {
-      props.onChange(Number(output));
       if (props.onOK) {
         props.onOK();
       }
       return;
     }
     if ([...'0123456789.', ...['删除', '清空']].includes(text)) {
-      setOutput(generateOutput(text, output));
+      const amountNum = generateOutput(text, output);
+      setOutput(amountNum);
+      props.onChange(Number(amountNum));
     }
   };
 

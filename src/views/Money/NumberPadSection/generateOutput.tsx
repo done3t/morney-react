@@ -1,4 +1,4 @@
-const generateOutput = (text: string, output = '0') => {
+const handleClick = (text: string, output = '0') => {
   switch (text) {
     case '0':
     case '1':
@@ -31,5 +31,15 @@ const generateOutput = (text: string, output = '0') => {
     default:
       return '';
   }
+
+};
+const generateOutput = (text: string, output = '0') => {
+  output = handleClick(text, output);
+  if (output.length > 16) {
+    output = output.slice(0, 16);
+  } else if (output.length === 0) {
+    output = '0';
+  }
+  return output;
 };
 export {generateOutput};
