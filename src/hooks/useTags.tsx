@@ -22,7 +22,7 @@ const useTags = () => {
   }, []);
   useUpdate(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags));
-  }, [tags]);
+  }, tags);
   const findTag = (id: number) => tags.find(tag => tag.id === id);
   const findTagIndex = (id: number) => tags.findIndex(tag => tag.id === id);
   const updateTag = (id: number, {name}: { name: string }) => {
