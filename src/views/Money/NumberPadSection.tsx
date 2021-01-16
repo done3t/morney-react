@@ -15,6 +15,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text === 'OK') {
       if (props.onOK) {
         props.onOK();
+        setOutput('0')
       }
       return;
     }
